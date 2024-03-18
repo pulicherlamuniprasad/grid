@@ -1,0 +1,75 @@
+
+
+
+<h2>Table Grid</h2>
+
+<button (click)="addNewRow()">Add New Row</button>
+
+
+<table>
+  <thead>
+    <tr>
+      <th (click)="sortBy('id')">S.No</th>
+      <th (click)="sortBy('name')">Name <span class="sort-icon">&#9650;&#9660;</span></th>
+      <th (click)="sortBy('phoneNumber')">Phone Number <span class="sort-icon">&#9650;&#9660;</span></th>
+      <th (click)="sortBy('email')">Email <span class="sort-icon">&#9650;&#9660;</span></th>
+      <th (click)="sortBy('status')">Status <span class="sort-icon">&#9650;&#9660;</span></th>
+      <th></th>
+      <th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of currentPageData; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <span *ngIf="!person.isEditing">{{ person.name }}</span>
+        <input *ngIf="person.isEditing" type="text" [(ngModel)]="person.name" >
+      </td>
+      <td>
+        <span *ngIf="!person.isEditing">{{ person.phoneNumber }}</span>
+        <input *ngIf="person.isEditing" type="text" [(ngModel)]="person.phoneNumber">
+      </td>
+      <td>
+        <span *ngIf="!person.isEditing">{{ person.email }}</span>
+        <input *ngIf="person.isEditing" type="text" [(ngModel)]="person.email">
+      </td>
+      <td>
+        <span *ngIf="!person.isEditing">{{ person.status }}</span>
+        <input *ngIf="person.isEditing" type="text" [(ngModel)]="person.status">
+      </td>
+      <td  style="width: 5px;" *ngIf="!person.isEditing">
+        <button *ngIf="!person.isEditing" (click)="editRow(person)">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" >edit</mat-icon>
+        </button>
+      </td>
+      
+      <td *ngIf="person.isEditing">
+        <!-- <button *ngIf="!person.isEditing" style="width: 5px;" (click)="editRow(person)">Edit</button> -->
+        <button *ngIf="person.isEditing" (click)="saveRow(person)">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" >save</mat-icon>
+        </button>
+        <button *ngIf="person.isEditing" (click)="cancelEdit(person)">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" >cancel</mat-icon>
+        </button>
+      </td>
+      <td style="width: 5px;" >
+        <button (click)="deleteRow(i)">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" >delete</mat-icon>
+        </button> <!-- Delete button -->   
+      </td>
+      
+  </tbody>
+</table>
+
+
+
+
+<!-- Pagination controls -->
+<div>
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+
