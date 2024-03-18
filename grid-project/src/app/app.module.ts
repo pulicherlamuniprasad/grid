@@ -9,8 +9,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent
   ],
   imports: [
-   MatIconModule,
-    BrowserModule,FormsModule,
+   MatIconModule,BrowserModule,FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
